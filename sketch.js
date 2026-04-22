@@ -200,7 +200,7 @@ function resetPuzzle() {
     let j = floor(random(i + 1));
     [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
   }
-  arrangeSidePanels();
+  arrangeSideTrays();
 }
 
 // Solves the puzzle by locking all the pieces in the correct locations.
@@ -213,7 +213,7 @@ function solvePuzzle() {
     piece.inPanel = false;
     piece.locked = true;
   }
-  arrangeSidePanels();
+  arrangeSideTrays();
 }
 
 // Helper function to calculate the squared distance between two points
@@ -425,6 +425,6 @@ function mouseReleased() {
   let releasedInPanel = mouseX < sidePanelWidth || mouseX > puzzleLeft + pieceSize * pieceCount;
   if (releasedInPanel) draggedPiece.inPanel = true;
   else trySnapLocation(draggedPiece);
-  arrangeSidePanels();
+  arrangeSideTrays();
   draggedPiece = null;
 }
