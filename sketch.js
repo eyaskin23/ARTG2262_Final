@@ -89,7 +89,7 @@ function createPiece(row, col, grid) {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  buttonHelper('Home', 10, 10, () => window.location.href = '../index.html');
+  buttonHelper('Home', 10, 10, () => window.location.href = '/ARTG2262_Final/index.html');
   buttonHelper('Toggle Preview', 120, 10, () => showPreview = !showPreview);
   buttonHelper('Reset', 320, 10, resetPuzzle);
   buttonHelper('Solve', 430, 10, solvePuzzle);
