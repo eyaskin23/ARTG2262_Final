@@ -124,8 +124,7 @@ function buildPuzzle() {
   let leftCount = ceil(panelPieceCount / 2);
   let boardSize = min(width * 0.55, height * 0.72, 700);
   let minBoardSize = 180;
-  // Shrink the board size until the left tray's stacked tiles fit below the header. 
-  // Makes sure that the board is big enough to fit the tray's stacked tiles.
+  // Shrink boardSize until the left tray can fit vertically below the header.
   while (boardSize > minBoardSize) {
     let candidatePieceSize = boardSize / pieceCount;
     // Same rule as trayTileSize after the loop: cap tray thumb by panel width and by board cell.
@@ -346,7 +345,7 @@ function drawPiece(piece) {
     curveVertex(half - tabOut, -half + tabIn); // Second tab shoulder across the tab.
     curveVertex(half - tabOut, -half); // Return to the flat edge after the tab.
     curveVertex(half, -half); // Reach the right end of this edge.
-    curveVertex(half, -half); // Duplicate end point for clean curve termination.
+    curveVertex(half, -half); // Duplicate end point for clean curve.
     endShape();
     pop();
   }
