@@ -1,4 +1,4 @@
-let pieceCount; // number of pieces in each row and column for the side panels
+let pieceCount; // number of puzzle pieces per row/column (NxN board)
 let pieces = []; // array to store the pieces
 let sourceImage; // the source image or video
 let sourceIsVideo = false; // whether the source is a video
@@ -124,7 +124,7 @@ function buildPuzzle() {
   let leftCount = ceil(panelPieceCount / 2);
   let boardSize = min(width * 0.55, height * 0.72, 700);
   let minBoardSize = 180;
-  // Shrink boardSize until the left tray can fit vertically below the header.
+  // Shrink boardSize until the tray area can fit vertically below the header.
   while (boardSize > minBoardSize) {
     let candidatePieceSize = boardSize / pieceCount;
     // Same rule as trayTileSize after the loop: cap tray thumb by panel width and by board cell.
@@ -408,7 +408,7 @@ function mousePressed() {
   for (let i = pieces.length - 1; i >= 0; i--) {
     let piece = pieces[i];
     if (piece.locked || piece.inPanel !== mouseInPanel) continue;
-    // The click radius is the radius of the piece in the tray.
+    // Click radius matches the rendered piece size (tray size in panels, full size on the board).
     let clickRadius = piece.inPanel ? trayTileSize / 2 : pieceSize / 2;
     // if the mouse is not within the click radius, the piece is not dragged.
     if (abs(mouseX - piece.x) >= clickRadius || abs(mouseY - piece.y) >= clickRadius) continue;
