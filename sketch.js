@@ -15,10 +15,20 @@ let showPreview = false; // whether to show the preview image
 let difficultySelect; // the dropdown menu for the difficulty selection
 let gap = 20; // the gap between the pieces in the tray
 
-// Preloads the image/video
+// Determines if the image parameter is a video.
+function imgParamIsVideo(param) {
+  let path = (param || '').split('?')[0].toLowerCase();
+  return path.endsWith('.mp4');
+}
+
+// Preloads the image (videos are created in setup once sourceIsVideo is set).
 function preload() {
   let params = new URLSearchParams(window.location.search);
   let imageParam = params.get('img') || 'default';
+  if (imgParamIsVideo(imageParam)) {
+    sourceIsVideo = true;
+    return;
+  }
   let url = imageParam.startsWith('http') ? imageParam : `https://picsum.photos/seed/${imageParam}/600/600`;
   sourceImage = loadImage(url);
 }
@@ -79,7 +89,7 @@ function createPiece(row, col, grid) {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  buttonHelper('Home', 10, 10, () => window.location.href = '/ARTG2262_Final/index.html');
+  buttonHelper('Home', 10, 10, () => window.location.href = '/index.html');
   buttonHelper('Toggle Preview', 120, 10, () => showPreview = !showPreview);
   buttonHelper('Reset', 320, 10, resetPuzzle);
   buttonHelper('Solve', 430, 10, solvePuzzle);
