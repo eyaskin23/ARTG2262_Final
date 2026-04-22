@@ -29,7 +29,7 @@ function preload() {
 // This method is used to create the timeline clips for the puzzle.
 // It creates an array of objects, each representing a segment of the song.
 // Each object contains the correct slot index, the audio start and duration seconds,
-// the part label, and the x and y position of the clip (on the timeline).
+// and the x and y position of the clip (on the timeline).
 function buildTimelineClipsFromSong() {
   let trackDurationSeconds = song.duration();
   if (!trackDurationSeconds || trackDurationSeconds <= 0) trackDurationSeconds = 30;
@@ -38,7 +38,6 @@ function buildTimelineClipsFromSong() {
     correctSlotIndex: index,
     audioStartSeconds: index * segmentDurationSeconds,
     audioDurationSeconds: segmentDurationSeconds,
-    partLabel: `Part ${index + 1}`,
     x: 0,
     y: 0,
   }));
@@ -177,12 +176,6 @@ function draw() {
     stroke(isInCorrectSlot ? color(0, 170, 70) : 180);
     strokeWeight(isInCorrectSlot ? 2.5 : 1);
     rect(clip.x - tileWidth / 2, clip.y - 40, tileWidth, 80, 10);
-
-    fill(40);
-    noStroke();
-    textAlign(CENTER, CENTER);
-    textSize(12);
-    text(clip.partLabel, clip.x, clip.y - 10);
 
     let playButtonWidth = min(tileWidth - 8, 64);
     let playButtonHeight = 22;
