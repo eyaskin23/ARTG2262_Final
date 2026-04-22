@@ -257,16 +257,15 @@ function draw() {
   for (let piece of pieces) if (piece.inPanel && piece !== draggedPiece) drawPiece(piece);
   if (draggedPiece) drawPiece(draggedPiece);
   if (showPreview) {
-    // The preview is the source image scaled down to 70% of the board width, 
-    // centered on the board, and stacked just above the board. 
-    let previewSize = pieceSize * pieceCount * 0.7;
-    let previewX = puzzleLeft + (pieceSize * pieceCount - previewSize) / 2;
-    let previewY = puzzleTop - previewSize - 10;
-    image(sourceImage, previewX, previewY, previewSize, previewSize);
+    // Draw the preview centered over the board with transparency
+    let boardSize = pieceSize * pieceCount;
+    tint(255, 180); // 70% opacity
+    image(sourceImage, puzzleLeft, puzzleTop, boardSize, boardSize);
+    noTint();
     noFill();
-    stroke(0);
+    stroke(255, 255, 255, 120);
     strokeWeight(2);
-    rect(previewX, previewY, previewSize, previewSize);
+    rect(puzzleLeft, puzzleTop, boardSize, boardSize);
   }
 }
 
